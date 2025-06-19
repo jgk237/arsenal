@@ -1,0 +1,22 @@
+# ----- Shared Rules -----
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# ----- Backend -----
+# Python
+backend/__pycache__/
+backend/*.py[cod]
+backend/.mypy_cache/
+
+# Virtual Env
+backend/venv/
+backend/.venv/
+
+# FastAPI
+backend/alembic/versions/*
+
+# ----- Frontend -----
+frontend/node_modules/
+frontend/dist/

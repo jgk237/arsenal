@@ -1,0 +1,44 @@
+# Environment files
+.env
+.env.local
+
+# Virtual environment
+**/arsene/
+
+# Python cache and build files
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+*.sqlite
+
+# Database migrations (if you want to exclude)
+alembic/versions/
+
+# Dependency directories
+node_modules/
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Alembic
+alembic.ini
+
+# Ignore but keep in repo
+!alembic/env.py
