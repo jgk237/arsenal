@@ -27,7 +27,10 @@
 
 # # You can add more endpoints, like /next or /last
 import httpx
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
+
+from models import User
+from utils.auth import get_current_user
 
 router = APIRouter()
 BASE_URL = "https://api.football-data.org/v4"
@@ -39,8 +42,9 @@ HEADERS = {
     "X-Auth-Token": API_TOKEN
 }
 
+
 @router.get("/season/{year}")
-async def get_arsenal_matches_by_season(year: int):
+async def get_arsenal_matches_by_season(year: int, user: User = Depends(get_current_user)):
     url = f"{BASE_URL}/competitions/PL/matches"
     
     print("\n=== REQUEST DETAILS ===")

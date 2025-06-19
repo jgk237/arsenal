@@ -1,6 +1,7 @@
 
 from sqlalchemy import Column, Integer, String
-from app.database import Base
+# from app.database import Base
+from database import Base
 from sqlalchemy import (
     Column,
     Integer,
@@ -27,7 +28,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     username = Column(String(50), unique=True, nullable=False)
     email = Column(String(120), unique=True, nullable=False)
-    password = Column(String(200), nullable=False)
+    hashed_password = Column(String(200), nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     posts = relationship('Post', back_populates='author')

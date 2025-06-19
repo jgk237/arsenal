@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Path
-from routes import matches
+from routes import user_routes, matches
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
@@ -14,3 +14,4 @@ app.add_middleware(
 )
 
 app.include_router(matches.router, prefix="/api/matches", tags=["Matches"])
+app.include_router(user_routes.router)
