@@ -13,6 +13,7 @@ from sqlalchemy import (
     Table
 )
 from sqlalchemy.orm import relationship, declarative_base
+from sqlalchemy.ext.hybrid import hybrid_property
 from datetime import datetime
 
 post_tags = Table(
@@ -52,6 +53,14 @@ class Post(Base):
     votes = relationship('Vote', back_populates='post', cascade='all, delete-orphan')
     tags = relationship('Tag', secondary=post_tags, back_populates='posts')
 
+    @hybrid_property
+    def upvotes(self):
+        return sum(1 for v in self.votes if v.value == 1)
+
+    @hybrid_property
+    def downvotes(self):
+        return sum(1 for v in self.votes if v.value == -1)
+
 
 # --- Comment Model ---
 class Comment(Base):
@@ -67,6 +76,14 @@ class Comment(Base):
     post = relationship('Post', back_populates='comments')
     replies = relationship('Reply', back_populates='comment', cascade='all, delete-orphan')
     votes = relationship('Vote', back_populates='comment', cascade='all, delete-orphan')
+
+    @hybrid_property
+    def upvotes(self):
+        return sum(1 for v in self.votes if v.value == 1)
+
+    @hybrid_property
+    def downvotes(self):
+        return sum(1 for v in self.votes if v.value == -1)
 
 
 # --- Reply Model ---
